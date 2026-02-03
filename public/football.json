@@ -1,0 +1,116 @@
+{
+  "category": "footballers",
+  "items": [
+    { "id": 1, "name": "Lionel Messi", "hint": "Klein" },
+    { "id": 2, "name": "Cristiano Ronaldo", "hint": "goals." },
+    { "id": 3, "name": "Neymar Jr.", "hint": "Skills." },
+    { "id": 4, "name": "Kylian Mbappé", "hint": "Supersnel." },
+    { "id": 5, "name": "Erling Haaland", "hint": "spits." },
+    { "id": 6, "name": "Zlatan Ibrahimović", "hint": "only one." },
+    { "id": 7, "name": "Kevin De Bruyne", "hint": "Assist-machine." },
+    { "id": 8, "name": "Virgil van Dijk", "hint": "muur." },
+    { "id": 9, "name": "Mohamed Salah", "hint": "Links." },
+    { "id": 10, "name": "Robert Lewandowski", "hint": "Altijd op de juiste plek." },
+
+    { "id": 11, "name": "Ronaldinho", "hint": "Pure samba-magie." },
+    { "id": 12, "name": "David Beckham", "hint": "Vrije trappen." },
+    { "id": 13, "name": "Thierry Henry", "hint": "Arsenal-legende." },
+    { "id": 14, "name": "Andrés Iniesta", "hint": "Stil, geniaal." },
+    { "id": 15, "name": "Xavi", "hint": "Tiki-taka brein." },
+    { "id": 16, "name": "Luka Modrić", "hint": "Ballenmeester met longen." },
+    { "id": 17, "name": "Sergio Ramos", "hint": "Rood kaart abonnement." },
+    { "id": 18, "name": "Karim Benzema", "hint": "Slimme afmaker." },
+    { "id": 19, "name": "Wayne Rooney", "hint": "Ruw talent." },
+    { "id": 20, "name": "Paul Pogba", "hint": "Kapsels > consistentie." },
+
+    { "id": 21, "name": "Jude Bellingham", "hint": "Jongboy." },
+    { "id": 22, "name": "Bukayo Saka", "hint": "Publiekslieveling Arsenal." },
+    { "id": 23, "name": "Pedri", "hint": "wonderkind." },
+    { "id": 24, "name": "Gavi", "hint": "Altijd boos." },
+    { "id": 25, "name": "Antoine Griezmann", "hint": "flair." },
+
+    { "id": 26, "name": "Marco Reus", "hint": "Talent" },
+    { "id": 27, "name": "Harry Kane", "hint": "Spits zonder prijzen (bijna)." },
+    { "id": 28, "name": "Son Heung-min", "hint": "Lachende killer." },
+    { "id": 29, "name": "Gareth Bale", "hint": "Golf" },
+    { "id": 30, "name": "Eden Hazard", "hint": "rode duivel" },
+
+    { "id": 31, "name": "Didier Drogba", "hint": "Finale-beest." },
+    { "id": 32, "name": "Samuel Eto'o", "hint": "Kampioenenjager." },
+    { "id": 33, "name": "Kaká", "hint": "gentleman." },
+    { "id": 34, "name": "Andrea Pirlo", "hint": "pass." },
+    { "id": 35, "name": "Gianluigi Buffon", "hint": "Keeper." },
+
+    { "id": 36, "name": "Manuel Neuer", "hint": "Meevoetballende keeper." },
+    { "id": 37, "name": "Iker Casillas", "hint": "legende." },
+    { "id": 38, "name": "Marc-André ter Stegen", "hint": "Barça." },
+    { "id": 39, "name": "Alisson Becker", "hint": "Liverpool." },
+    { "id": 40, "name": "Ederson", "hint": "Keeper met assists." },
+
+    { "id": 41, "name": "Arjen Robben", "hint": "kaal." },
+    { "id": 42, "name": "Robin van Persie", "hint": "Vliegende kopbal." },
+    { "id": 43, "name": "Ruud Gullit", "hint": "Dreadlocks." },
+    { "id": 44, "name": "Frank Rijkaard", "hint": "Elegant + stevig." },
+    { "id": 45, "name": "Clarence Seedorf", "hint": "Vier CL-titels." },
+
+    { "id": 46, "name": "Rafael Leão", "hint": "Milan flair." },
+    { "id": 47, "name": "Victor Osimhen", "hint": "Masker + goals." },
+    { "id": 48, "name": "Khvicha Kvaratskhelia", "hint": "Onuitspreekbaar." },
+    { "id": 49, "name": "Rodri", "hint": "Onzichtbaar." },
+    { "id": 50, "name": "Declan Rice", "hint": "Engelse motor." },
+
+    { "id": 51, "name": "Casemiro", "hint": "Tackle-machine." },
+    { "id": 52, "name": "Toni Kroos", "hint": "GPS-pass." },
+    { "id": 53, "name": "Joshua Kimmich", "hint": "Altijd aanwezig." },
+    { "id": 54, "name": "Bruno Fernandes", "hint": "Altijd klagen." },
+    { "id": 55, "name": "Bernardo Silva", "hint": "Technische mier." },
+
+    { "id": 56, "name": "Riyad Mahrez", "hint": "Linkerbeen kunst." },
+    { "id": 57, "name": "Sadio Mané", "hint": "Explosief." },
+    { "id": 58, "name": "Luis Suárez", "hint": "Bijtgevaar." },
+    { "id": 59, "name": "Ángel Di María", "hint": "Finale-specialist." },
+    { "id": 60, "name": "Carlos Tevez", "hint": "Straatvoetbal vibe." },
+
+    { "id": 61, "name": "Romelu Lukaku", "hint": "Kracht." },
+    { "id": 62, "name": "N'Golo Kanté", "hint": "Overal tegelijk.,cutie" },
+    { "id": 63, "name": "Jamal Musiala", "hint": "Dansende dribbelaar." },
+    { "id": 64, "name": "Phil Foden", "hint": "Peps parel." },
+    { "id": 65, "name": "Martin Ødegaard", "hint": "regisseur." },
+
+    { "id": 66, "name": "Vinícius Jr.", "hint": "Snel" },
+    { "id": 67, "name": "Rodrygo", "hint": "Big-game speler." },
+    { "id": 68, "name": "João Félix", "hint": "Talent op zoek naar vorm." },
+    { "id": 69, "name": "Antony", "hint": "rondjes." },
+    { "id": 70, "name": "Jadon Sancho", "hint": "Bundesliga vs PL." },
+
+    { "id": 71, "name": "Marco van Basten", "hint": "Onhoudbare volley." },
+    { "id": 72, "name": "Dennis Bergkamp", "hint": "Eerste aanname GOAT." },
+    { "id": 73, "name": "George Best", "hint": "Rockstar-voetballer." },
+    { "id": 74, "name": "Diego Maradona", "hint": "Goddelijke hand." },
+    { "id": 75, "name": "Pelé", "hint": "Koning voetbal." },
+
+    { "id": 76, "name": "Thiago Silva", "hint": "Defensive professor." },
+    { "id": 77, "name": "Raphaël Varane", "hint": "Stil betrouwbaar." },
+    { "id": 78, "name": "Gerard Piqué", "hint": "Verdediger + drama." },
+    { "id": 79, "name": "Jordi Alba", "hint": "Overlap koning." },
+    { "id": 80, "name": "Kyle Walker", "hint": "Snelste back." },
+
+    { "id": 81, "name": "Hakim Ziyech", "hint": "Linkervoet magie." },
+    { "id": 82, "name": "Achraf Hakimi", "hint": "Wingback raket." },
+    { "id": 84, "name": "Frenkie de Jong", "hint": "Dribbelt uit druk." },
+    { "id": 85, "name": "Matthijs de Ligt", "hint": "Jonge leider." },
+
+    { "id": 86, "name": "Memphis Depay", "hint": "goat." },
+    { "id": 87, "name": "Wesley Sneijder", "hint": "2010." },
+    { "id": 90, "name": "James Rodríguez", "hint": "WK wonder." },
+
+    { "id": 92, "name": "Mesut Özil", "hint": "Assist machine." },
+    { "id": 93, "name": "Raheem Sterling", "hint": "Chaotische snelheid." },
+    { "id": 95, "name": "Roberto Carlos", "hint": "vrije trap." },
+
+    { "id": 96, "name": "Alessandro Del Piero", "hint": "Curly finesse." },
+    { "id": 97, "name": "Francesco Totti", "hint": "Roma." },
+    { "id": 98, "name": "Paolo Maldini", "hint": "Verdedigen zonder tackelen." },
+    { "id": 99, "name": "Thiago Motta", "hint": "Coach vibes." }
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "category": "superheroes",
+  "items": [
+    { "id": 1, "name": "Spider-Man", "universe": "Marvel", "hint": "OG" },
+    { "id": 2, "name": "Iron Man", "universe": "Marvel", "hint": "Miljardair" },
+    { "id": 3, "name": "Captain America", "universe": "Marvel", "hint": "leider." },
+    { "id": 4, "name": "Thor", "universe": "Marvel", "hint": "hamer." },
+    { "id": 5, "name": "Hulk", "universe": "Marvel", "hint": "boos ." },
+    { "id": 6, "name": "Black Widow", "universe": "Marvel", "hint": "Spion." },
+    { "id": 7, "name": "Hawkeye", "universe": "Marvel", "hint": " perfecte aim." },
+    { "id": 8, "name": "Doctor Strange", "universe": "Marvel", "hint": "Magie." },
+    { "id": 9, "name": "Black Panther", "universe": "Marvel", "hint": "Wakander." },
+    { "id": 10, "name": "Ant-Man", "universe": "Marvel", "hint": "mier." },
+
+    { "id": 11, "name": "Captain Marvel", "universe": "Marvel", "hint": "Kosmische krachten." },
+    { "id": 12, "name": "Scarlet Witch", "universe": "Marvel", "hint": "realiteit buigen." },
+    { "id": 13, "name": "Vision", "universe": "Marvel", "hint": "Android." },
+    { "id": 14, "name": "Falcon", "universe": "Marvel", "hint": "Vliegt." },
+    { "id": 15, "name": "Winter Soldier", "universe": "Marvel", "hint": "issues." },
+    { "id": 16, "name": "Star-Lord", "universe": "Marvel", "hint": "Ruimteheld." },
+    { "id": 17, "name": "Gamora", "universe": "Marvel", "hint": "space warrior." },
+    { "id": 18, "name": "Groot", "universe": "Marvel", "hint": "Boom." },
+    { "id": 19, "name": "Rocket Raccoon", "universe": "Marvel", "hint": "Gewapend." },
+    { "id": 20, "name": "Deadpool", "universe": "Marvel", "hint": "geneest ." },
+
+    { "id": 21, "name": "Batman", "universe": "DC", "hint": "gadgets." },
+    { "id": 22, "name": "Superman", "universe": "DC", "hint": "Vliegt." },
+    { "id": 23, "name": "Wonder Woman", "universe": "DC", "hint": "baddie" },
+    { "id": 24, "name": "The Flash", "universe": "DC", "hint": "rood" },
+    { "id": 25, "name": "Aquaman", "universe": "DC", "hint": "water" },
+    { "id": 26, "name": "Cyborg", "universe": "DC", "hint": "machine." },
+    { "id": 27, "name": "Green Lantern", "universe": "DC", "hint": "Ring" },
+    { "id": 28, "name": "Shazam", "universe": "DC", "hint": "Kind" },
+    { "id": 29, "name": "Supergirl", "universe": "DC", "hint": "baddie." },
+    { "id": 30, "name": "Batgirl", "universe": "DC", "hint": "baddie." },
+
+    { "id": 31, "name": "Nightwing", "universe": "DC", "hint": "Ex-sidekick met acrobatische stijl." },
+    { "id": 32, "name": "Robin", "universe": "DC", "hint": "Jong." },
+    { "id": 33, "name": "Green Arrow", "universe": "DC", "hint": "Rijke boogschutter." },
+    { "id": 34, "name": "Harley Quinn", "universe": "DC", "hint": "baddie" },
+    { "id": 35, "name": "Catwoman", "universe": "DC", "hint": "baddie." },
+
+    { "id": 36, "name": "Omni-Man", "universe": "Invincible", "hint": "are you sure" },
+    { "id": 37, "name": "Invincible", "universe": "Invincible", "hint": "Jong." },
+    { "id": 38, "name": "Atom Eve", "universe": "Invincible", "hint": "Kan materie aanpassen." },
+    { "id": 39, "name": "Robot", "universe": "Invincible", "hint": "Slim." },
+    { "id": 40, "name": "Monster Girl", "universe": "Invincible", "hint": "monster." },
+    { "id": 41, "name": "The Immortal", "universe": "Invincible", "hint": "waardeloos." },
+    { "id": 42, "name": "Rex Splode", "universe": "Invincible", "hint": "goat." },
+    { "id": 43, "name": "Dupli-Kate", "universe": "Invincible", "hint": "kopieërmachine." },
+    { "id": 44, "name": "Shrinking Ray", "universe": "Invincible", "hint": "Kan zichzelf extreem klein maken." }
+]
+}

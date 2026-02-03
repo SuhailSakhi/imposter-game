@@ -1,36 +1,106 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🕵️ Imposter Game
 
-## Getting Started
+Een spannende party game webapp gebouwd met Next.js en Tailwind CSS, geoptimaliseerd voor mobiele telefoons.
 
-First, run the development server:
+## 🎮 Hoe te spelen
+
+1. **Categorie kiezen**: Selecteer één van de 5 categorieën
+2. **Setup**: Kies het aantal spelers (3-12) en het aantal imposters (1-3)
+3. **Reveal**: Elke speler bekijkt zijn rol op zijn eigen telefoon
+   - **Crewmates** zien het woord/item
+   - **Imposters** krijgen alleen een hint
+4. **Spelen**: Stel elkaar vragen over het onderwerp
+   - Crewmates: probeer subtiel te bewijzen dat je het kent
+   - Imposters: gebruik de hint om mee te doen zonder ontdekt te worden
+5. **Stemmen**: Aan het einde stem je wie de imposter is!
+
+## 🎯 Features
+
+- ✨ Mobiel-geoptimaliseerde interface
+- 🎨 Mooie gradient design met Tailwind CSS
+- 📱 PWA-ready (kan geïnstalleerd worden als app)
+- � 5 verschillende categorieën
+- 👥 Ondersteuning voor 3-12 spelers
+- 🕵️ Tot 3 imposters tegelijk!
+- 💡 Imposters krijgen hints
+- ✏️ Eigen woorden toevoegen mogelijk
+
+## 📚 Categorieën
+
+### � Locaties
+10 verschillende locaties zoals strand, restaurant, ziekenhuis, bioscoop, etc.
+
+### ⚽ Voetballers
+Beroemde voetballers zoals Messi, Ronaldo, Mbappé, Haaland, etc.
+
+### 🗡️ Clash Royale
+Populaire Clash Royale kaarten met hun eigenschappen
+
+### ⭐ Beroemdheden
+Bekende celebrities uit muziek, film en sport
+
+### ✏️ Eigen Woorden
+Maak je eigen lijst met woorden voor een gepersonaliseerde ervaring!
+
+## 🎨 Tech Stack
+
+- **Framework**: Next.js 16 (App Router)
+- **Styling**: Tailwind CSS
+- **Language**: TypeScript
+- **Package Manager**: npm
+
+## 🛠️ Development
 
 ```bash
+# Installeer dependencies
+npm install
+
+# Start development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+
+# Build voor productie
+npm run build
+
+# Start productie server
+npm start
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 📱 Installeren op telefoon
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### iPhone/iPad:
+1. Open de app in Safari
+2. Klik op het "Delen" icoon
+3. Scroll naar beneden en klik op "Zet op beginscherm"
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Android:
+1. Open de app in Chrome
+2. Klik op het menu (3 puntjes)
+3. Klik op "Toevoegen aan startscherm"
 
-## Learn More
+## 📝 Spelregels Tips
 
-To learn more about Next.js, take a look at the following resources:
+- **Voor Crewmates**: Stel specifieke vragen zonder het te obvious te maken
+- **Voor Imposters**: Gebruik de hint slim en stel algemene vragen
+- **Timing**: Speel 5-10 minuten per ronde voor de beste ervaring
+- **Strategie**: Met meerdere imposters kunnen ze samenwerken!
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🎉 Perfect voor
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- Feestjes
+- Borrels
+- Teambuilding
+- Gezellige avonden met vrienden
+- Icebreaker activiteiten
+- Gaming communities (Clash Royale spelers!)
+- Voetbalfans
 
-## Deploy on Vercel
+## 🆕 Nieuwe Features
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- ✅ Meerdere imposters (tot 3!)
+- ✅ Hints voor imposters
+- ✅ 5 verschillende categorieën
+- ✅ Eigen woorden toevoegen
+- ✅ API integraties voor voetballers, Clash Royale en beroemdheden
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Veel plezier met spelen! 🎮✨
+
