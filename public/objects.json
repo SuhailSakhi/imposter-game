@@ -1,0 +1,51 @@
+{
+  "category": "modern_objects",
+  "items": [
+    { "id": 1, "name": "Smartphone", "hint": "Connectie" },
+    { "id": 2, "name": "Laptop", "hint": "Productie" },
+    { "id": 3, "name": "Draadloze oortjes", "hint": "Luister" },
+    { "id": 4, "name": "Smartwatch", "hint": "Meting" },
+    { "id": 5, "name": "Powerbank", "hint": "Reserve" },
+    { "id": 6, "name": "Oplaadkabel", "hint": "Stroom" },
+    { "id": 7, "name": "Bluetooth speaker", "hint": "Volume" },
+    { "id": 8, "name": "Gamecontroller", "hint": "Input" },
+    { "id": 9, "name": "PlayStation", "hint": "Sessie" },
+    { "id": 10, "name": "Smart TV", "hint": "Stream" },
+
+    { "id": 11, "name": "Airfryer", "hint": "Crispy" },
+    { "id": 12, "name": "Magnetron", "hint": "Opwarmen" },
+    { "id": 13, "name": "Koffiemachine", "hint": "Cafeïne" },
+    { "id": 14, "name": "Waterkoker", "hint": "Koken" },
+    { "id": 15, "name": "Koelkast", "hint": "Koelen" },
+
+    { "id": 16, "name": "Sleutels", "hint": "Toegang" },
+    { "id": 17, "name": "Portemonnee", "hint": "Betaal" },
+    { "id": 18, "name": "OV-chipkaart", "hint": "Incheck" },
+    { "id": 19, "name": "Elektrische fiets", "hint": "Boost" },
+    { "id": 20, "name": "Auto", "hint": "Rit" },
+
+    { "id": 21, "name": "Navigatie-app", "hint": "Richting" },
+    { "id": 22, "name": "Thuisbezorgd-tas", "hint": "Bezorging" },
+    { "id": 23, "name": "Pakketdoos", "hint": "Levering" },
+    { "id": 24, "name": "Deurbelcamera", "hint": "Beweging" },
+    { "id": 25, "name": "Wifi-router", "hint": "Netwerk" },
+
+    { "id": 26, "name": "Streamingabonnement", "hint": "Kijken" },
+    { "id": 27, "name": "Notitie-app", "hint": "Opslaan" },
+    { "id": 28, "name": "Agenda-app", "hint": "Planning" },
+    { "id": 29, "name": "Cloudopslag", "hint": "Backup" },
+    { "id": 30, "name": "Wachtwoordmanager", "hint": "Kluis" },
+
+    { "id": 31, "name": "Fitness tracker", "hint": "Stappen" },
+    { "id": 32, "name": "Weegschaal", "hint": "Gewicht" },
+    { "id": 33, "name": "Spiegel", "hint": "Beeld" },
+    { "id": 34, "name": "Zonnebril", "hint": "Schaduw" },
+    { "id": 35, "name": "Rugzak", "hint": "Mee" },
+
+    { "id": 36, "name": "Toetsenbord", "hint": "Typ" },
+    { "id": 37, "name": "Muis", "hint": "Cursor" },
+    { "id": 38, "name": "Webcam", "hint": "Video" },
+    { "id": 39, "name": "Microfoon", "hint": "Audio" },
+    { "id": 40, "name": "Noise cancelling koptelefoon", "hint": "Dempen" }
+  ]
+}

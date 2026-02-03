@@ -4,7 +4,7 @@ import { useState } from 'react';
 
 type GameState = 'menu' | 'setup' | 'reveal' | 'playing' | 'results';
 type Role = 'imposter' | 'crewmate';
-type Category = 'footballers' | 'clash-royale' | 'celebrities' | 'superheroes' | 'custom';
+type Category = 'footballers' | 'clash-royale' | 'celebrities' | 'superheroes' | 'objects' | 'custom';
 
 interface Player {
   id: number;
@@ -22,6 +22,7 @@ const categories = {
   'clash-royale': [] as GameItem[],
   celebrities: [] as GameItem[],
   superheroes: [] as GameItem[],
+  objects: [] as GameItem[],
   custom: [] as GameItem[],
 };
 
@@ -40,6 +41,7 @@ export default function ImposterGame() {
   const [clashRoyale, setClashRoyale] = useState<GameItem[]>([]);
   const [celebrities, setCelebrities] = useState<GameItem[]>([]);
   const [superheroes, setSuperheroes] = useState<GameItem[]>([]);
+  const [objects, setObjects] = useState<GameItem[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isCardFlipped, setIsCardFlipped] = useState(false);
   const [isHolding, setIsHolding] = useState(false);
@@ -109,6 +111,22 @@ export default function ImposterGame() {
     setIsLoading(false);
   };
 
+  const loadObjects = async () => {
+    setIsLoading(true);
+    try {
+      const response = await fetch('/objects.json');
+      const data = await response.json();
+      const objectsList: GameItem[] = data.items.map((item: any) => ({
+        name: item.name,
+        hint: item.hint
+      }));
+      setObjects(objectsList);
+    } catch (error) {
+      console.error('Error loading objects:', error);
+    }
+    setIsLoading(false);
+  };
+
   const selectCategory = (category: Category) => {
     setSelectedCategory(category);
     if (category === 'footballers' && footballers.length === 0) {
@@ -119,6 +137,8 @@ export default function ImposterGame() {
       loadCelebrities();
     } else if (category === 'superheroes' && superheroes.length === 0) {
       loadSuperheroes();
+    } else if (category === 'objects' && objects.length === 0) {
+      loadObjects();
     }
     setGameState('setup');
   };
@@ -139,6 +159,7 @@ export default function ImposterGame() {
     if (selectedCategory === 'clash-royale') return clashRoyale;
     if (selectedCategory === 'celebrities') return celebrities;
     if (selectedCategory === 'superheroes') return superheroes;
+    if (selectedCategory === 'objects') return objects;
     return customWords.map(word => ({ name: word, hint: 'Denk goed na...' }));
   };
 
@@ -229,6 +250,7 @@ export default function ImposterGame() {
       'clash-royale': 'CLASH ROYALE',
       celebrities: 'BEROEMDHEDEN',
       superheroes: 'SUPERHELDEN',
+      objects: 'OBJECTEN',
       custom: 'CUSTOM',
     };
     return titles[selectedCategory];
@@ -240,6 +262,7 @@ export default function ImposterGame() {
       'clash-royale': 'Card',
       celebrities: 'Beroemdheid',
       superheroes: 'Superheld',
+      objects: 'Object',
       custom: 'Woord',
     };
     return labels[selectedCategory];
@@ -251,6 +274,7 @@ export default function ImposterGame() {
       'clash-royale': 'De card was',
       celebrities: 'De beroemdheid was',
       superheroes: 'De superheld was',
+      objects: 'Het object was',
       custom: 'Het woord was',
     };
     return labels[selectedCategory];
@@ -283,6 +307,7 @@ export default function ImposterGame() {
                 { id: 'clash-royale', label: 'CLASH ROYALE' },
                 { id: 'celebrities', label: 'BEROEMDHEDEN' },
                 { id: 'superheroes', label: 'SUPERHELDEN' },
+                { id: 'objects', label: 'OBJECTEN' },
                 { id: 'custom', label: 'CUSTOM' },
               ].map((cat, index) => (
                 <button 
@@ -374,17 +399,26 @@ export default function ImposterGame() {
                 </label>
                 <input 
                   type="number" 
+                  inputMode="numeric"
+                  pattern="[0-9]*"
                   min="3" 
                   max="12" 
                   value={playerCount} 
                   onChange={(e) => {
-                    const value = Math.max(3, Math.min(12, Number(e.target.value) || 3));
+                    const value = e.target.value === '' ? '' : Number(e.target.value);
+                    setPlayerCount(value as number);
+                  }}
+                  onBlur={(e) => {
+                    let value = Number(e.target.value);
+                    if (isNaN(value) || value < 3) value = 3;
+                    if (value > 12) value = 12;
                     setPlayerCount(value);
                     // Pas imposterCount aan als het te hoog is
                     if (imposterCount > Math.floor(value / 2)) {
                       setImposterCount(Math.floor(value / 2));
                     }
                   }}
+                  onFocus={(e) => e.target.select()}
                   className="w-full px-6 py-4 bg-[#1A1F2E] border-2 border-[#016FB9] rounded-lg text-white text-center text-3xl font-bold focus:outline-none focus:border-[#016FB9] focus:ring-2 focus:ring-[#016FB9]/50 transition-all"
                 />
               </div>
@@ -395,14 +429,23 @@ export default function ImposterGame() {
                 </label>
                 <input 
                   type="number" 
+                  inputMode="numeric"
+                  pattern="[0-9]*"
                   min="1" 
                   max={Math.min(3, Math.floor(playerCount / 2))} 
                   value={imposterCount} 
                   onChange={(e) => {
+                    const value = e.target.value === '' ? '' : Number(e.target.value);
+                    setImposterCount(value as number);
+                  }}
+                  onBlur={(e) => {
                     const maxImposters = Math.min(3, Math.floor(playerCount / 2));
-                    const value = Math.max(1, Math.min(maxImposters, Number(e.target.value) || 1));
+                    let value = Number(e.target.value);
+                    if (isNaN(value) || value < 1) value = 1;
+                    if (value > maxImposters) value = maxImposters;
                     setImposterCount(value);
                   }}
+                  onFocus={(e) => e.target.select()}
                   className="w-full px-6 py-4 bg-[#1A1F2E] border-2 border-[#DC143C] rounded-lg text-white text-center text-3xl font-bold focus:outline-none focus:border-[#DC143C] focus:ring-2 focus:ring-[#DC143C]/50 transition-all"
                 />
               </div>
@@ -434,14 +477,14 @@ export default function ImposterGame() {
 
             <div className="h-px bg-[#2A3F5F]"></div>
 
-            <div className="space-y-6">
-              <p className="text-center text-base text-[#004C8C] uppercase tracking-wide">
+            <div className="space-y-4">
+              <p className="text-center text-sm text-[#004C8C] uppercase tracking-wide">
                 Houd de kaart ingedrukt om je rol te zien
               </p>
               
               {/* Flip Card Container */}
               <div 
-                className="relative w-full h-[32rem] cursor-pointer select-none"
+                className="relative w-full h-[28rem] cursor-pointer select-none"
                 style={{ perspective: '1000px' }}
               >
                 <div 
@@ -465,10 +508,10 @@ export default function ImposterGame() {
                     }}
                   >
                     <div className="text-center">
-                      <div className="w-40 h-40 mx-auto mb-6 bg-[#1A1F2E]/20 rounded-full border-4 border-[#016FB9] flex items-center justify-center">
-                        <span className="text-8xl font-bold text-white">?</span>
+                      <div className="w-32 h-32 mx-auto mb-5 bg-[#1A1F2E]/20 rounded-full border-4 border-[#016FB9] flex items-center justify-center">
+                        <span className="text-7xl font-bold text-white">?</span>
                       </div>
-                      <p className="text-white text-2xl font-bold uppercase tracking-wider">
+                      <p className="text-white text-xl font-bold uppercase tracking-wider">
                         Druk &amp; Houd
                       </p>
                     </div>
@@ -477,43 +520,43 @@ export default function ImposterGame() {
                   {/* Card Back */}
                   {showRole && (
               <div 
-                className="absolute w-full h-full rounded-2xl border-4 text-center shadow-2xl p-8"
+                className="absolute w-full h-full rounded-2xl border-4 text-center shadow-2xl p-6"
                 style={{ 
                   backfaceVisibility: 'hidden',
                   WebkitBackfaceVisibility: 'hidden',
                   transform: 'rotateY(180deg)'
                 }}
               >
-                <div className={`h-full rounded-2xl border-4 flex flex-col items-center justify-center p-8 ${
+                <div className={`h-full rounded-2xl border-4 flex flex-col items-center justify-center p-6 ${
                   players[currentPlayer].role === 'imposter' 
                     ? 'bg-[#DC143C] border-[#DC143C]' 
                     : 'bg-[#016FB9] border-[#016FB9]'
                 }`}>
-                  <div className="w-32 h-32 mx-auto mb-6 bg-[#1A1F2E]/20 rounded-full border-4 border-[#016FB9] flex items-center justify-center shadow-md">
-                    <span className="text-6xl font-bold text-white">
-                      {players[currentPlayer].role === 'imposter' ? 'I' : 'C'}
-                    </span>
-                  </div>
+                  {players[currentPlayer].role === 'imposter' && (
+                    <div className="w-24 h-24 mx-auto mb-4 bg-[#1A1F2E]/20 rounded-full border-4 border-white flex items-center justify-center shadow-md">
+                      <span className="text-5xl font-bold text-white">I</span>
+                    </div>
+                  )}
                   
-                  <h3 className="text-4xl font-bold text-white mb-6 uppercase tracking-tight">
-                    {players[currentPlayer].role === 'imposter' ? 'IMPOSTER' : 'CREWMATE'}
+                  <h3 className="text-3xl font-bold text-white mb-4 uppercase tracking-tight">
+                    {players[currentPlayer].role === 'imposter' ? 'IMPOSTER' : 'PLAYER'}
                   </h3>
                   
                   {players[currentPlayer].role === 'crewmate' ? (
-                    <div className="bg-[#1A1F2E]/95 rounded-xl p-6 shadow-md w-full">
-                      <p className="text-[#016FB9] text-sm font-semibold mb-3 uppercase tracking-wider">
+                    <div className="bg-[#1A1F2E]/95 rounded-xl p-5 shadow-md w-full">
+                      <p className="text-[#016FB9] text-xs font-semibold mb-2 uppercase tracking-wider">
                         {getLabel()}
                       </p>
-                      <p className="text-3xl text-white font-bold uppercase">
+                      <p className="text-2xl text-white font-bold uppercase break-words">
                         {theme.name}
                       </p>
                     </div>
                   ) : (
-                    <div className="bg-[#1A1F2E]/95 rounded-xl p-6 shadow-md w-full">
-                      <p className="text-[#DC143C] text-sm font-semibold mb-3 uppercase tracking-wider">
+                    <div className="bg-[#1A1F2E]/95 rounded-xl p-5 shadow-md w-full">
+                      <p className="text-white text-xs font-semibold mb-2 uppercase tracking-wider">
                         Hint
                       </p>
-                      <p className="text-base text-white font-medium">
+                      <p className="text-sm text-white font-medium leading-snug">
                         {theme.hint}
                       </p>
                     </div>
@@ -616,52 +659,52 @@ export default function ImposterGame() {
         
         {/* RESULTS SCREEN */}
         {gameState === 'results' && (
-          <div className="bg-[#1A1F2E] rounded-lg shadow-2xl p-8 space-y-6 border border-[#2A3F5F] animate-fadeIn">
+          <div className="bg-[#1A1F2E] rounded-lg shadow-2xl p-6 space-y-4 border border-[#2A3F5F] animate-fadeIn">
             <div className="space-y-2">
-              <h2 className="text-3xl font-bold text-center text-white uppercase tracking-tight">
+              <h2 className="text-2xl font-bold text-center text-white uppercase tracking-tight">
                 RESULTATEN
               </h2>
               <div className="h-px bg-[#2A3F5F]"></div>
             </div>
             
-            <div className="bg-[#1A1F2E] border-2 border-[#016FB9] rounded-lg p-6 shadow-sm">
-              <h3 className="text-xs font-bold text-center text-[#016FB9] uppercase tracking-wider mb-4">
+            <div className="bg-[#1A1F2E] border-2 border-[#016FB9] rounded-lg p-4 shadow-sm">
+              <h3 className="text-xs font-bold text-center text-[#016FB9] uppercase tracking-wider mb-2">
                 {getResultLabel()}
               </h3>
-              <p className="text-3xl text-center font-bold text-white uppercase mb-3">
+              <p className="text-xl text-center font-bold text-white uppercase mb-2">
                 {theme.name}
               </p>
-              <p className="text-sm text-center text-[#004C8C]">
+              <p className="text-xs text-center text-[#004C8C]">
                 {theme.hint}
               </p>
             </div>
 
-            <div className="space-y-2">
+            <div className="space-y-2 max-h-64 overflow-y-auto">
               {players.map((player) => (
                 <div 
                   key={player.id} 
-                  className={`p-4 rounded-lg flex items-center justify-between border-2 shadow-sm ${
+                  className={`p-3 rounded-lg flex items-center justify-between border-2 shadow-sm ${
                     player.role === 'imposter' 
                       ? 'bg-[#FFF5F5] border-[#DC143C]' 
                       : 'bg-[#1A1F2E] border-[#016FB9]'
                   }`}
                 >
-                  <div className="flex items-center gap-3">
-                    <div className={`w-10 h-10 rounded-full border-2 flex items-center justify-center text-sm font-bold ${
+                  <div className="flex items-center gap-2">
+                    <div className={`w-8 h-8 rounded-full border-2 flex items-center justify-center text-xs font-bold ${
                       player.role === 'imposter' 
                         ? 'border-[#DC143C] text-[#DC143C] bg-[#1A1F2E]' 
                         : 'border-[#016FB9] text-[#016FB9] bg-[#1A1F2E]'
                     }`}>
                       {player.id}
                     </div>
-                    <span className="font-bold text-white text-sm uppercase tracking-wide">
+                    <span className="font-bold text-white text-xs uppercase tracking-wide">
                       Speler {player.id}
                     </span>
                   </div>
                   <span className={`font-bold text-xs uppercase tracking-wider ${
                     player.role === 'imposter' ? 'text-[#DC143C]' : 'text-[#016FB9]'
                   }`}>
-                    {player.role === 'imposter' ? 'IMPOSTER' : 'CREWMATE'}
+                    {player.role === 'imposter' ? 'IMPOSTER' : 'PLAYER'}
                   </span>
                 </div>
               ))}
@@ -669,7 +712,7 @@ export default function ImposterGame() {
 
             <button 
               onClick={resetGame} 
-              className="w-full bg-[#016FB9] text-white text-sm font-bold py-4 rounded hover:bg-[#004C8C] transition-all uppercase tracking-wide shadow-sm"
+              className="w-full bg-[#016FB9] text-white text-sm font-bold py-3 rounded hover:bg-[#004C8C] transition-all uppercase tracking-wide shadow-sm"
             >
               Nieuw Spel
             </button>
