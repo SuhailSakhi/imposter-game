@@ -5,6 +5,7 @@ import { useState } from 'react';
 type GameState = 'menu' | 'setup' | 'reveal' | 'playing' | 'results';
 type Role = 'imposter' | 'crewmate';
 type Category = 'footballers' | 'clash-royale' | 'celebrities' | 'superheroes' | 'objects' | 'custom';
+type Language = 'nl' | 'en';
 
 interface Player {
   id: number;
@@ -28,6 +29,8 @@ const categories = {
 
 export default function ImposterGame() {
   const [gameState, setGameState] = useState<GameState>('menu');
+  const [language, setLanguage] = useState<Language>('nl');
+  const [showRules, setShowRules] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState<Category>('footballers');
   const [playerCount, setPlayerCount] = useState(5);
   const [imposterCount, setImposterCount] = useState(1);
@@ -46,6 +49,110 @@ export default function ImposterGame() {
   const [isCardFlipped, setIsCardFlipped] = useState(false);
   const [isHolding, setIsHolding] = useState(false);
   const [startingPlayer, setStartingPlayer] = useState<number | null>(null);
+
+  // Translation object
+  const t = {
+    nl: {
+      title: 'IMPOSTER',
+      subtitle: 'Deception Game',
+      selectCategory: 'Selecteer Categorie',
+      categories: {
+        footballers: 'VOETBALLERS',
+        'clash-royale': 'CLASH ROYALE',
+        celebrities: 'BEROEMDHEDEN',
+        superheroes: 'SUPERHELDEN',
+        objects: 'OBJECTEN',
+        custom: 'CUSTOM',
+      },
+      loading: 'Laden...',
+      addWord: 'Woord toevoegen...',
+      add: 'Add',
+      minWordsRequired: 'Minimaal 3 woorden vereist',
+      playerCount: 'Aantal Spelers (3-12)',
+      imposterCount: 'Aantal Imposters',
+      startGame: 'Start Game',
+      player: 'SPELER',
+      of: 'van',
+      holdCard: 'Houd de kaart ingedrukt om je rol te zien',
+      pressHold: 'Druk & Houd',
+      imposter: 'IMPOSTER',
+      playerRole: 'PLAYER',
+      hint: 'Hint',
+      next: 'Volgende',
+      whoStarts: 'Wie Begint?',
+      startsFirst: 'begint',
+      continue: 'Verder',
+      results: 'RESULTATEN',
+      newGame: 'Nieuw Spel',
+      labels: {
+        footballers: 'Voetballer',
+        'clash-royale': 'Card',
+        celebrities: 'Beroemdheid',
+        superheroes: 'Superheld',
+        objects: 'Object',
+        custom: 'Woord',
+      },
+      resultLabels: {
+        footballers: 'De voetballer was',
+        'clash-royale': 'De card was',
+        celebrities: 'De beroemdheid was',
+        superheroes: 'De superheld was',
+        objects: 'Het object was',
+        custom: 'Het woord was',
+      },
+    },
+    en: {
+      title: 'IMPOSTER',
+      subtitle: 'Deception Game',
+      selectCategory: 'Select Category',
+      categories: {
+        footballers: 'FOOTBALLERS',
+        'clash-royale': 'CLASH ROYALE',
+        celebrities: 'CELEBRITIES',
+        superheroes: 'SUPERHEROES',
+        objects: 'OBJECTS',
+        custom: 'CUSTOM',
+      },
+      loading: 'Loading...',
+      addWord: 'Add word...',
+      add: 'Add',
+      minWordsRequired: 'Minimum 3 words required',
+      playerCount: 'Number of Players (3-12)',
+      imposterCount: 'Number of Imposters',
+      startGame: 'Start Game',
+      player: 'PLAYER',
+      of: 'of',
+      holdCard: 'Press and hold the card to see your role',
+      pressHold: 'Press & Hold',
+      imposter: 'IMPOSTER',
+      playerRole: 'PLAYER',
+      hint: 'Hint',
+      next: 'Next',
+      whoStarts: 'Who Starts?',
+      startsFirst: 'starts first',
+      continue: 'Continue',
+      results: 'RESULTS',
+      newGame: 'New Game',
+      labels: {
+        footballers: 'Footballer',
+        'clash-royale': 'Card',
+        celebrities: 'Celebrity',
+        superheroes: 'Superhero',
+        objects: 'Object',
+        custom: 'Word',
+      },
+      resultLabels: {
+        footballers: 'The footballer was',
+        'clash-royale': 'The card was',
+        celebrities: 'The celebrity was',
+        superheroes: 'The superhero was',
+        objects: 'The object was',
+        custom: 'The word was',
+      },
+    },
+  };
+
+  const lang = t[language];
 
   const loadFootballers = async () => {
     setIsLoading(true);
@@ -160,13 +267,15 @@ export default function ImposterGame() {
     if (selectedCategory === 'celebrities') return celebrities;
     if (selectedCategory === 'superheroes') return superheroes;
     if (selectedCategory === 'objects') return objects;
-    return customWords.map(word => ({ name: word, hint: 'Denk goed na...' }));
+    const hintText = language === 'nl' ? 'Denk goed na...' : 'Think carefully...';
+    return customWords.map(word => ({ name: word, hint: hintText }));
   };
 
   const startGame = () => {
     const items = getItemsForCategory();
     if (items.length === 0) {
-      alert('Voeg eerst items toe!');
+      const alertText = language === 'nl' ? 'Voeg eerst items toe!' : 'Add items first!';
+      alert(alertText);
       return;
     }
     
@@ -244,42 +353,6 @@ export default function ImposterGame() {
     setGameState('menu');
   };
 
-  const getCategoryTitle = () => {
-    const titles = {
-      footballers: 'VOETBALLERS',
-      'clash-royale': 'CLASH ROYALE',
-      celebrities: 'BEROEMDHEDEN',
-      superheroes: 'SUPERHELDEN',
-      objects: 'OBJECTEN',
-      custom: 'CUSTOM',
-    };
-    return titles[selectedCategory];
-  };
-
-  const getLabel = () => {
-    const labels = {
-      footballers: 'Voetballer',
-      'clash-royale': 'Card',
-      celebrities: 'Beroemdheid',
-      superheroes: 'Superheld',
-      objects: 'Object',
-      custom: 'Woord',
-    };
-    return labels[selectedCategory];
-  };
-
-  const getResultLabel = () => {
-    const labels = {
-      footballers: 'De voetballer was',
-      'clash-royale': 'De card was',
-      celebrities: 'De beroemdheid was',
-      superheroes: 'De superheld was',
-      objects: 'Het object was',
-      custom: 'Het woord was',
-    };
-    return labels[selectedCategory];
-  };
-
   return (
     <div className="min-h-screen flex items-center justify-center p-4 bg-[#0F1419]">
       <div className="w-full max-w-md">
@@ -288,27 +361,75 @@ export default function ImposterGame() {
         {gameState === 'menu' && (
           <div className="bg-[#1A1F2E] rounded-lg shadow-2xl p-8 space-y-8 border border-[#2A3F5F] animate-fadeIn">
             <div className="space-y-2 animate-slideDown">
+              <div className="flex justify-between items-center mb-2">
+                <button
+                  onClick={() => setShowRules(!showRules)}
+                  className="w-8 h-8 bg-[#016FB9] text-white text-sm font-bold rounded-full hover:bg-[#004C8C] transition-all flex items-center justify-center"
+                >
+                  i
+                </button>
+                <button
+                  onClick={() => setLanguage(language === 'nl' ? 'en' : 'nl')}
+                  className="px-3 py-1 bg-[#016FB9] text-white text-xs font-bold rounded hover:bg-[#004C8C] transition-all uppercase"
+                >
+                  {language === 'nl' ? 'EN' : 'NL'}
+                </button>
+              </div>
               <h1 className="text-5xl font-bold text-center text-white tracking-tight uppercase">
-                IMPOSTER
+                {lang.title}
               </h1>
               <p className="text-center text-[#016FB9] text-xs uppercase tracking-widest">
-                Deception Game
+                {lang.subtitle}
               </p>
             </div>
+            
+            {showRules && (
+              <div className="bg-[#1A1F2E] border-2 border-[#016FB9] rounded-lg p-6 shadow-sm animate-slideDown">
+                <div className="flex justify-between items-center mb-4">
+                  <h3 className="text-sm font-bold text-[#016FB9] uppercase tracking-wider">
+                    {language === 'nl' ? 'Speluitleg' : 'How to Play'}
+                  </h3>
+                  <button
+                    onClick={() => setShowRules(false)}
+                    className="text-[#016FB9] hover:text-white text-xl font-bold transition-colors"
+                  >
+                    ×
+                  </button>
+                </div>
+                <ul className="space-y-3 text-white text-sm">
+                  <li className="flex items-start">
+                    <span className="text-[#016FB9] mr-2 font-bold">1.</span>
+                    <span>{language === 'nl' ? 'Kies een categorie en aantal spelers' : 'Choose a category and number of players'}</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-[#016FB9] mr-2 font-bold">2.</span>
+                    <span>{language === 'nl' ? 'Elke speler ziet hun rol (Player of Imposter)' : 'Each player sees their role (Player or Imposter)'}</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-[#016FB9] mr-2 font-bold">3.</span>
+                    <span>{language === 'nl' ? 'Players kennen het onderwerp, Imposters krijgen een hint' : 'Players know the topic, Imposters get a hint'}</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-[#DC143C] mr-2 font-bold">4.</span>
+                    <span>{language === 'nl' ? 'Stel vragen en stem wie de Imposter is!' : 'Ask questions and vote who the Imposter is!'}</span>
+                  </li>
+                </ul>
+              </div>
+            )}
             
             <div className="h-px bg-[#2A3F5F]"></div>
             
             <div className="space-y-3">
               <h2 className="text-xs font-bold text-[#016FB9] uppercase tracking-wider mb-4">
-                Selecteer Categorie
+                {lang.selectCategory}
               </h2>
               {[
-                { id: 'footballers', label: 'VOETBALLERS' },
-                { id: 'clash-royale', label: 'CLASH ROYALE' },
-                { id: 'celebrities', label: 'BEROEMDHEDEN' },
-                { id: 'superheroes', label: 'SUPERHELDEN' },
-                { id: 'objects', label: 'OBJECTEN' },
-                { id: 'custom', label: 'CUSTOM' },
+                { id: 'footballers', label: lang.categories.footballers },
+                { id: 'clash-royale', label: lang.categories['clash-royale'] },
+                { id: 'celebrities', label: lang.categories.celebrities },
+                { id: 'superheroes', label: lang.categories.superheroes },
+                { id: 'objects', label: lang.categories.objects },
+                { id: 'custom', label: lang.categories.custom },
               ].map((cat, index) => (
                 <button 
                   key={cat.id} 
@@ -330,19 +451,19 @@ export default function ImposterGame() {
               onClick={backToMenu} 
               className="text-[#016FB9] text-sm font-semibold uppercase tracking-wide hover:text-white hover:-translate-x-1 transition-all"
             >
-              ← Terug
+              ← {language === 'nl' ? 'Terug' : 'Back'}
             </button>
 
             <div className="space-y-2">
               <h1 className="text-2xl font-bold text-center text-white tracking-tight uppercase">
-                {getCategoryTitle()}
+                {lang.categories[selectedCategory]}
               </h1>
               <div className="h-px bg-[#2A3F5F]"></div>
             </div>
 
             {isLoading && (
               <div className="text-center py-8">
-                <p className="text-[#016FB9] text-sm uppercase tracking-wider">Laden...</p>
+                <p className="text-[#016FB9] text-sm uppercase tracking-wider">{lang.loading}</p>
               </div>
             )}
 
@@ -354,14 +475,14 @@ export default function ImposterGame() {
                     value={customInput} 
                     onChange={(e) => setCustomInput(e.target.value)} 
                     onKeyPress={(e) => e.key === 'Enter' && addCustomWord()} 
-                    placeholder="Woord toevoegen..." 
+                    placeholder={lang.addWord}
                     className="flex-1 px-4 py-3 bg-[#1A1F2E] border border-[#2A3F5F] rounded text-white placeholder-[#016FB9]/60 focus:outline-none focus:border-[#016FB9] text-sm"
                   />
                   <button 
                     onClick={addCustomWord} 
                     className="bg-[#016FB9] text-white px-6 py-3 rounded font-bold hover:bg-[#004C8C] transition-all uppercase text-sm shadow-sm"
                   >
-                    Add
+                    {lang.add}
                   </button>
                 </div>
 
@@ -386,7 +507,7 @@ export default function ImposterGame() {
 
                 {customWords.length < 3 && (
                   <p className="text-xs text-[#DC143C] text-center font-semibold uppercase tracking-wide">
-                    Minimaal 3 woorden vereist
+                    {lang.minWordsRequired}
                   </p>
                 )}
               </div>
@@ -395,7 +516,7 @@ export default function ImposterGame() {
             <div className="space-y-6 pt-4">
               <div>
                 <label className="block text-xs font-bold text-[#016FB9] uppercase tracking-wider mb-3">
-                  Aantal Spelers (3-12)
+                  {lang.playerCount}
                 </label>
                 <input 
                   type="number" 
@@ -425,29 +546,30 @@ export default function ImposterGame() {
 
               <div>
                 <label className="block text-xs font-bold text-[#DC143C] uppercase tracking-wider mb-3">
-                  Aantal Imposters (1-{Math.min(3, Math.floor(playerCount / 2))})
+                  {lang.imposterCount}
                 </label>
-                <input 
-                  type="number" 
-                  inputMode="numeric"
-                  pattern="[0-9]*"
-                  min="1" 
-                  max={Math.min(3, Math.floor(playerCount / 2))} 
-                  value={imposterCount} 
-                  onChange={(e) => {
-                    const value = e.target.value === '' ? '' : Number(e.target.value);
-                    setImposterCount(value as number);
-                  }}
-                  onBlur={(e) => {
+                <div className="flex gap-2 justify-center">
+                  {[1, 2, 3].map((num) => {
                     const maxImposters = Math.min(3, Math.floor(playerCount / 2));
-                    let value = Number(e.target.value);
-                    if (isNaN(value) || value < 1) value = 1;
-                    if (value > maxImposters) value = maxImposters;
-                    setImposterCount(value);
-                  }}
-                  onFocus={(e) => e.target.select()}
-                  className="w-full px-6 py-4 bg-[#1A1F2E] border-2 border-[#DC143C] rounded-lg text-white text-center text-3xl font-bold focus:outline-none focus:border-[#DC143C] focus:ring-2 focus:ring-[#DC143C]/50 transition-all"
-                />
+                    const isDisabled = num > maxImposters;
+                    return (
+                      <button
+                        key={num}
+                        onClick={() => !isDisabled && setImposterCount(num)}
+                        disabled={isDisabled}
+                        className={`flex-1 py-4 rounded-lg text-2xl font-bold transition-all ${
+                          imposterCount === num
+                            ? 'bg-[#DC143C] text-white border-2 border-[#DC143C] scale-105 shadow-lg'
+                            : isDisabled
+                            ? 'bg-[#1A1F2E] text-[#2A3F5F] border-2 border-[#2A3F5F] cursor-not-allowed opacity-50'
+                            : 'bg-[#1A1F2E] text-white border-2 border-[#DC143C] hover:bg-[#DC143C] hover:scale-105'
+                        }`}
+                      >
+                        {num}
+                      </button>
+                    );
+                  })}
+                </div>
               </div>
             </div>
 
@@ -455,7 +577,7 @@ export default function ImposterGame() {
               onClick={startGame} 
               className="w-full bg-[#016FB9] text-white text-sm font-bold py-4 rounded hover:bg-[#004C8C] transition-all uppercase tracking-wide shadow-sm"
             >
-              Start Game
+              {lang.startGame}
             </button>
           </div>
         )}
@@ -468,10 +590,10 @@ export default function ImposterGame() {
                 <span className="text-2xl font-bold text-[#016FB9]">{currentPlayer + 1}</span>
               </div>
               <h2 className="text-3xl font-bold text-white uppercase tracking-tight">
-                SPELER {currentPlayer + 1}
+                {lang.player} {currentPlayer + 1}
               </h2>
               <p className="text-[#016FB9] text-xs uppercase tracking-widest">
-                {currentPlayer + 1} van {playerCount}
+                {currentPlayer + 1} {lang.of} {playerCount}
               </p>
             </div>
 
@@ -479,7 +601,7 @@ export default function ImposterGame() {
 
             <div className="space-y-4">
               <p className="text-center text-sm text-[#004C8C] uppercase tracking-wide">
-                Houd de kaart ingedrukt om je rol te zien
+                {lang.holdCard}
               </p>
               
               {/* Flip Card Container */}
@@ -512,7 +634,7 @@ export default function ImposterGame() {
                         <span className="text-7xl font-bold text-white">?</span>
                       </div>
                       <p className="text-white text-xl font-bold uppercase tracking-wider">
-                        Druk &amp; Houd
+                        {lang.pressHold}
                       </p>
                     </div>
                   </div>
@@ -539,13 +661,13 @@ export default function ImposterGame() {
                   )}
                   
                   <h3 className="text-3xl font-bold text-white mb-4 uppercase tracking-tight">
-                    {players[currentPlayer].role === 'imposter' ? 'IMPOSTER' : 'PLAYER'}
+                    {players[currentPlayer].role === 'imposter' ? lang.imposter : lang.playerRole}
                   </h3>
                   
                   {players[currentPlayer].role === 'crewmate' ? (
                     <div className="bg-[#1A1F2E]/95 rounded-xl p-5 shadow-md w-full">
                       <p className="text-[#016FB9] text-xs font-semibold mb-2 uppercase tracking-wider">
-                        {getLabel()}
+                        {lang.labels[selectedCategory]}
                       </p>
                       <p className="text-2xl text-white font-bold uppercase break-words">
                         {theme.name}
@@ -554,7 +676,7 @@ export default function ImposterGame() {
                   ) : (
                     <div className="bg-[#1A1F2E]/95 rounded-xl p-5 shadow-md w-full">
                       <p className="text-white text-xs font-semibold mb-2 uppercase tracking-wider">
-                        Hint
+                        {lang.hint}
                       </p>
                       <p className="text-sm text-white font-medium leading-snug">
                         {theme.hint}
@@ -572,7 +694,7 @@ export default function ImposterGame() {
                 onClick={nextPlayer} 
                 className="w-full bg-[#016FB9] text-white text-sm font-bold py-4 rounded hover:bg-[#004C8C] transition-all uppercase tracking-wide shadow-sm"
               >
-                {currentPlayer < playerCount - 1 ? 'Volgende Speler' : 'Start Game'}
+                {currentPlayer < playerCount - 1 ? lang.next : lang.startGame}
               </button>
               )}
             </div>
@@ -593,7 +715,7 @@ export default function ImposterGame() {
             {startingPlayer && (
               <div className="bg-[#016FB9]/20 border-2 border-[#016FB9] rounded-lg p-6 text-center animate-pulse">
                 <p className="text-xs text-[#016FB9] uppercase tracking-wider mb-2 font-bold">
-                  Startspeler
+                  {lang.whoStarts}
                 </p>
                 <div className="flex items-center justify-center gap-3">
                   <div className="w-12 h-12 bg-[#016FB9] rounded-full border-2 border-white flex items-center justify-center">
@@ -601,9 +723,9 @@ export default function ImposterGame() {
                   </div>
                   <div>
                     <p className="text-2xl font-bold text-white uppercase">
-                      Speler {startingPlayer}
+                      {lang.player} {startingPlayer}
                     </p>
-                    <p className="text-sm text-[#016FB9]">begint het spel</p>
+                    <p className="text-sm text-[#016FB9]">{lang.startsFirst}</p>
                   </div>
                 </div>
               </div>
@@ -611,20 +733,20 @@ export default function ImposterGame() {
             
             <div className="bg-[#1A1F2E] border border-[#2A3F5F] rounded-lg p-6 shadow-sm">
               <h3 className="text-xs font-bold text-[#016FB9] uppercase tracking-wider mb-4">
-                Spelregels
+                {language === 'nl' ? 'Spelregels' : 'Game Rules'}
               </h3>
               <ul className="space-y-2 text-white text-sm">
                 <li className="flex items-start">
                   <span className="text-[#016FB9] mr-2 font-bold">→</span>
-                  <span>Crewmates: Stel vragen over het onderwerp</span>
+                  <span>{language === 'nl' ? 'Crewmates: Stel vragen over het onderwerp' : 'Crewmates: Ask questions about the topic'}</span>
                 </li>
                 <li className="flex items-start">
                   <span className="text-[#DC143C] mr-2 font-bold">→</span>
-                  <span>Imposters: Gebruik de hint slim</span>
+                  <span>{language === 'nl' ? 'Imposters: Gebruik de hint slim' : 'Imposters: Use the hint cleverly'}</span>
                 </li>
                 <li className="flex items-start">
                   <span className="text-[#016FB9] mr-2 font-bold">→</span>
-                  <span>Stem wie de imposter is</span>
+                  <span>{language === 'nl' ? 'Stem wie de imposter is' : 'Vote who the imposter is'}</span>
                 </li>
               </ul>
             </div>
@@ -632,7 +754,7 @@ export default function ImposterGame() {
             <div className="grid grid-cols-2 gap-4">
               <div className="bg-[#1A1F2E] border-2 border-[#016FB9] rounded-lg p-6 text-center shadow-sm">
                 <div className="text-xs text-[#016FB9] uppercase tracking-wider mb-2 font-bold">
-                  Crewmates
+                  {language === 'nl' ? 'Spelers' : 'Players'}
                 </div>
                 <div className="text-4xl font-bold text-[#016FB9]">
                   {playerCount - imposterCount}
@@ -652,7 +774,7 @@ export default function ImposterGame() {
               onClick={endGame} 
               className="w-full bg-[#016FB9] text-white text-sm font-bold py-4 rounded hover:bg-[#004C8C] transition-all uppercase tracking-wide shadow-sm"
             >
-              Toon Resultaten
+              {language === 'nl' ? 'Toon Resultaten' : 'Show Results'}
             </button>
           </div>
         )}
@@ -662,14 +784,14 @@ export default function ImposterGame() {
           <div className="bg-[#1A1F2E] rounded-lg shadow-2xl p-6 space-y-4 border border-[#2A3F5F] animate-fadeIn">
             <div className="space-y-2">
               <h2 className="text-2xl font-bold text-center text-white uppercase tracking-tight">
-                RESULTATEN
+                {lang.results}
               </h2>
               <div className="h-px bg-[#2A3F5F]"></div>
             </div>
             
             <div className="bg-[#1A1F2E] border-2 border-[#016FB9] rounded-lg p-4 shadow-sm">
               <h3 className="text-xs font-bold text-center text-[#016FB9] uppercase tracking-wider mb-2">
-                {getResultLabel()}
+                {lang.resultLabels[selectedCategory]}
               </h3>
               <p className="text-xl text-center font-bold text-white uppercase mb-2">
                 {theme.name}
@@ -698,13 +820,13 @@ export default function ImposterGame() {
                       {player.id}
                     </div>
                     <span className="font-bold text-white text-xs uppercase tracking-wide">
-                      Speler {player.id}
+                      {lang.player} {player.id}
                     </span>
                   </div>
                   <span className={`font-bold text-xs uppercase tracking-wider ${
                     player.role === 'imposter' ? 'text-[#DC143C]' : 'text-[#016FB9]'
                   }`}>
-                    {player.role === 'imposter' ? 'IMPOSTER' : 'PLAYER'}
+                    {player.role === 'imposter' ? lang.imposter : lang.playerRole}
                   </span>
                 </div>
               ))}
@@ -714,7 +836,7 @@ export default function ImposterGame() {
               onClick={resetGame} 
               className="w-full bg-[#016FB9] text-white text-sm font-bold py-3 rounded hover:bg-[#004C8C] transition-all uppercase tracking-wide shadow-sm"
             >
-              Nieuw Spel
+              {lang.newGame}
             </button>
           </div>
         )}
