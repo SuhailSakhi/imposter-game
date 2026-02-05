@@ -18,17 +18,36 @@ export const viewport: Viewport = {
   initialScale: 1,
   maximumScale: 1,
   userScalable: false,
-  themeColor: "#292524",
+  themeColor: "#016FB9",
 };
 
 export const metadata: Metadata = {
   title: "Imposter Game - Wie is de imposter?",
   description: "Een spannend party game voor 3-12 spelers. Ontdek wie de imposter is!",
   manifest: "/manifest.json",
+  icons: {
+    icon: [
+      { url: "/images/imposter.png", sizes: "any" },
+    ],
+    apple: [
+      { url: "/images/imposter.png", sizes: "180x180", type: "image/png" },
+    ],
+  },
   appleWebApp: {
     capable: true,
     statusBarStyle: "black-translucent",
     title: "Imposter Game",
+  },
+  openGraph: {
+    title: "Imposter Game - Wie is de imposter?",
+    description: "Een spannend party game voor 3-12 spelers. Ontdek wie de imposter is!",
+    images: ["/images/imposter.png"],
+  },
+  twitter: {
+    card: "summary",
+    title: "Imposter Game",
+    description: "Een spannend party game voor 3-12 spelers. Ontdek wie de imposter is!",
+    images: ["/images/imposter.png"],
   },
 };
 
