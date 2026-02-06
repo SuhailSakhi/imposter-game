@@ -175,7 +175,8 @@ export default function ImposterGame() {
     try {
       const response = await fetch('/clash.json');
       const data = await response.json();
-      const clashRoyaleCards: GameItem[] = data.cards.map((card: any) => ({
+      // Data is now a direct array
+      const clashRoyaleCards: GameItem[] = data.map((card: any) => ({
         name: card.name,
         hint: card.hint
       }));
